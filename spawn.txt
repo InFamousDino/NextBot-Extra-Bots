@@ -5,3 +5,4 @@
 MOD/spawnable/walter.xml : NextBot - Extra/Walter
 MOD/spawnable/white.xml : NextBot - Extra/Walter White
 MOD/spawnable/saul.xml : NextBot - Extra/Saul Goodman
+MOD/spawnable/nerd.xml : NextBot - Extra/Nerd Emoji

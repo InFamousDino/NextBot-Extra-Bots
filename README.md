@@ -1,10 +1,9 @@
 <hr>
 
-# Teardown - NextBot Extra Bots! [github-size]  ![github-stars]
+# Teardown - NextBot Extra Bots! ![github-stars]
 
 ### Media   [![Steam][steam-badge]][steam-link]
 
-[github-size]: https://img.shields.io/github/languages/code-size/InFamousDino/NextBot-Extra-Bots
 [github-stars]: https://img.shields.io/github/stars/InFamousDino/NextBot-Extra-Bots?style=social
 
 [steam-badge]: https://img.shields.io/static/v1?label=Steam&message=Download&color=lightgrey&logo=steam	

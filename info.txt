@@ -1,0 +1,4 @@
+name = NextBot - Extra Bots
+author = SebsLore
+description = NextBot will find you everywhere, destroy everything. Based on popular Gmod addon. This is using Danyaads Nextbot Mod.
+tags = Global, Spawn, Gameplay

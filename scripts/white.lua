@@ -1,4 +1,4 @@
-local tex = LoadSprite("MOD/imgs/saul.png")
+local tex = LoadSprite("MOD/imgs/white.png")
 
 --local prefab = FindBody("nextbot", true)
 
@@ -28,22 +28,19 @@ local updatePathTime = 0.0
 local patrolTime = 0.0
 
 function init()
-    local sound = LoadSound('MOD/sounds/saulgood.ogg')
     isSpawned = false
     target = GetPlayerPos()
 
     timePassed = 0
-    sleep = 90
+    sleep = 20
     hehehahgrr = false
-
-    PlaySound(sound)
 
     --DebugPrint("NextBot Spawned!")
 end
 
 function tick(dt)
 
-    local sound = LoadSound('MOD/sounds/saulgood.ogg')
+    local sound = LoadSound('MOD/sounds/confession.ogg')
     
     if(isSpawned == false) then
         if(spawnDelay < 4) then

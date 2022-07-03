@@ -1,4 +1,4 @@
-local tex = LoadSprite("MOD/imgs/saul.png")
+local tex = LoadSprite("MOD/imgs/walter.png")
 
 --local prefab = FindBody("nextbot", true)
 
@@ -28,22 +28,12 @@ local updatePathTime = 0.0
 local patrolTime = 0.0
 
 function init()
-    local sound = LoadSound('MOD/sounds/saulgood.ogg')
     isSpawned = false
     target = GetPlayerPos()
-
-    timePassed = 0
-    sleep = 90
-    hehehahgrr = false
-
-    PlaySound(sound)
-
     --DebugPrint("NextBot Spawned!")
 end
 
 function tick(dt)
-
-    local sound = LoadSound('MOD/sounds/saulgood.ogg')
     
     if(isSpawned == false) then
         if(spawnDelay < 4) then
@@ -64,11 +54,6 @@ function tick(dt)
         return
     end
 
-    if(hehehahgrr == false) then
-        hehehahgrr = true
-        timePassed = GetTime()
-    end
-
     if(position[2] < -20) then
         position[2] = 10
     end
@@ -83,15 +68,6 @@ function tick(dt)
 
     if(getDist(position,GetPlayerPos()) < 2) then
         SetPlayerHealth(0.0)
-    end
-
-    if GetTime() > timePassed + sleep then
-
-        PlaySound(sound)
-        --DebugPrint(timePassed)
-        timePassed = 0
-
-        hehehahgrr = false
     end
 
     navigate()
@@ -117,8 +93,6 @@ function navigate()
         target = Vec(math.random(position[1]-1000,position[1]+1000),0,math.random(position[3]-1000,position[3]+1000))
         patrolTime = 0.0
     end
-
-
 
     local d = 0
     local l = GetPathLength()

@@ -1,4 +1,4 @@
 name = NextBot - Extra Bots
 author = SebsLore
-description = NextBot will find you everywhere, destroy everything. Based on popular Gmod addon. This is using Danyaads Nextbot Mod.
+description = NextBot will find you everywhere, destroy everything. Based on popular Gmod addon. This is using Danyaads Nextbot Mod. I have created a few characters some with music. I currently have Walter, Walter H White, Nerd Emoji and Saul Goodman.
 tags = Global, Spawn, Gameplay

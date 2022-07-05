@@ -5,6 +5,7 @@ local jumpForce = 1
 local maxDist = 64
 
 local useMusic = true
+local canDie = false
 
 local debugMode = false -- If you want to see the bot's path to the player
 ------------------------
@@ -45,6 +46,9 @@ function init()
     end
     if(HasKey("savegame.mod.nextbot_extra.music")) then
         useMusic = GetBool("savegame.mod.nextbot_extra.music")
+    end
+    if(HasKey("savegame.mod.nextbot_extra.candie")) then
+        canDie = GetBool("savegame.mod.nextbot_extra.candie")
     end
 
     timePassed = 0
@@ -111,7 +115,10 @@ function tick(dt)
 
     if(GetPlayerHealth() > 0.0 and getDist(position,GetPlayerPos()) < 2) then
         SetPlayerHealth(0.0)
-        isDisabled = true
+
+        if(canDie) then
+            isDisabled = true
+        end
     end
 
     updateNavigation(dt)

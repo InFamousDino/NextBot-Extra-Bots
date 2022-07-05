@@ -82,11 +82,12 @@ function draw()
 
     UiPush()
     UiAlign("center middle")
+    UiColor(1, 0.5, 0.5,1)
     UiTranslate(UiCenter(), UiMiddle()+200)
     if UiTextButton("Reset") then
         speed = 0.0092*5000
         maxDist = 64
-        useMusic = false
+        useMusic = true
         canDie = false
     end
     UiPop()

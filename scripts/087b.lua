@@ -1,5 +1,5 @@
 ------- SETTINGS -------
-local tex = LoadSprite("MOD/imgs/nerd.png")
+local tex = LoadSprite("MOD/imgs/087b.png")
 local speedMove = 0.0092
 local jumpForce = 1
 local maxDist = 64
@@ -56,7 +56,7 @@ function init()
     end
 
     timePassed = 0
-    sleep = 50
+    sleep = 15
     hehehahgrr = false
 
     --DebugPrint("NextBot Spawned!")
@@ -64,7 +64,7 @@ end
 
 function tick(dt)
 
-    local sound = LoadSound('MOD/sounds/nerd.ogg')
+    local sound = LoadSound('MOD/sounds/bingchilling.ogg')
 
     if(maxDist >= 200) then
         maxDist = 999999

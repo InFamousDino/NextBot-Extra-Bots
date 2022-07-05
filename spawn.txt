@@ -3,3 +3,6 @@ MOD/spawnable/white.xml : NextBot - Extra/Walter White
 MOD/spawnable/saul.xml : NextBot - Extra/Saul Goodman
 MOD/spawnable/nerd.xml : NextBot - Extra/Nerd Emoji
 MOD/spawnable/clown.xml : NextBot - Extra/Clown Emoji
+MOD/spawnable/quandale.xml : NextBot - Extra/Quandale Dingle
+MOD/spawnable/087b.xml : NextBot - Extra/SCP 087b
+MOD/spawnable/scoot.xml : NextBot - Extra/Scoot

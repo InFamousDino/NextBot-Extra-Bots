@@ -4,7 +4,7 @@ local speedMove = 0.0092
 local jumpForce = 1
 local maxDist = 64
 
-local useMusic = false
+local useMusic = true
 local canDie = false
 
 local debugMode = false -- If you want to see the bot's path to the player
@@ -13,6 +13,7 @@ local debugMode = false -- If you want to see the bot's path to the player
 local jumpPower = 0.0
 local position = Vec(0,0,0)
 local lastposition = Vec(0,0,0)
+local lastVelocity = Vec(0,0,0)
 local velocity = Vec(0,0,0)
 local lastpoint
 local targetpoint
@@ -23,11 +24,14 @@ local llast = 0.0
 local updatePathTime = 0.0
 local patrolTime = 0.0
 
+
 local isDisabled = false
+
+local stuckTime = 0.0
 
 local navigation = {
     thinkTime = 0.0,
-    timeout = 2.0,
+    timeout = 3.0,
     target = Vec(0,0,0),
     resultRetrieved = false
 }
@@ -45,14 +49,14 @@ function init()
         maxDist = GetFloat("savegame.mod.nextbot_extra.maxdist")
     end
     if(HasKey("savegame.mod.nextbot_extra.music")) then
-        useMusic = false
+        useMusic = GetBool("savegame.mod.nextbot_extra.music")
     end
     if(HasKey("savegame.mod.nextbot_extra.candie")) then
         canDie = GetBool("savegame.mod.nextbot_extra.candie")
     end
 
     timePassed = 0
-    sleep = 24
+    sleep = 20
     hehehahgrr = false
 
     --DebugPrint("NextBot Spawned!")
@@ -60,7 +64,11 @@ end
 
 function tick(dt)
 
-    local sound = LoadSound('MOD/sounds/clown.ogg')
+    local sound = LoadSound('MOD/sounds/fnaf2.ogg')
+
+    if(maxDist >= 200) then
+        maxDist = 999999
+    end
     
     if(isSpawned == false) then
         if(spawnDelay < 4) then
@@ -89,7 +97,20 @@ function tick(dt)
     if(isDisabled) then
         return
     end
+
+    if(VecLength(lastVelocity) < 0.01) then
+        stuckTime = stuckTime + 0.1
+
+        if(stuckTime > 5) then
+            MakeHole(VecSub(position,Vec(0,0.5,0)), 5, 5)
+            stuckTime = 0
+        end
+    else
+        stuckTime = 0
+    end
     
+    
+    lastVelocity = velocity
     
     if(debugMode) then
         for i=2,#botPath do
@@ -115,8 +136,8 @@ function tick(dt)
 
     if(GetPlayerHealth() > 0.0 and getDist(position,GetPlayerPos()) < 2) then
         SetPlayerHealth(0.0)
-        
-        if(canDie) then
+
+        if(canDie == true) then
             isDisabled = true
         end
     end
@@ -202,7 +223,7 @@ function navigate()
 
     if hit then
         if(getDist(position,target) < maxDist) then
-            if(target[2] > position[2]+10) then
+            if(target[2] > position[2]+20) then
                 jumpPower = jumpForce
             end
         end
@@ -223,11 +244,17 @@ function navigate()
 end
 
 function calculateCollision(dir)
-    local hit, d, n = QueryRaycast(VecAdd(position,Vec(0,1,0)), dir, 2, 0.2)    
+    local hit, d, n = QueryRaycast(VecAdd(position,Vec(0,1,0)), dir, 2, 0.1)
 
     if hit then
-       velocity = VecAdd(velocity,VecScale(dir,-1))
-       velocity[2] = velocity[2] + 0.3
+       velocity = VecAdd(velocity,VecScale(dir,-1.2))
+       --velocity[2] = velocity[2] + 0.3
+    else
+        local hit2, d2, n2 = QueryRaycast(VecAdd(position,Vec(0,0.1,0)), dir, 1)
+        if hit2 then
+        -- velocity = VecAdd(velocity,VecScale(dir,-1.2))
+            velocity[2] = velocity[2] + 0.4
+        end
     end
 end
 
@@ -238,12 +265,12 @@ function navigationClear()
 end
 
 function updateNavigation(dt)
-	if GetPathState() == "busy" then
+    if GetPathState() == "busy" then
 		navigation.thinkTime = navigation.thinkTime + dt
 		if navigation.thinkTime > navigation.timeout then
 			AbortPath()
 		end
-        velocity = VecAdd(velocity,VecScale(VecNormalize(VecSub(position,navigation.target)),-speedMove/3))
+        velocity = VecAdd(velocity,VecScale(VecNormalize(VecSub(position,navigation.target)),-speedMove))
         velocity[2] = 0
 	end
 
@@ -280,7 +307,7 @@ function draw()
     if(isDisabled) then
         return
     end
-    local faceT = Transform(VecAdd(position,Vec(0,1,0)), QuatLookAt(position,GetCameraTransform().pos))
+    local faceT = Transform(VecAdd(position,Vec(0,0.4,0)), QuatLookAt(position,GetCameraTransform().pos))
 
     DrawSprite(tex, faceT, 3, 3, 1, 1, 1, 1, true)
 end
